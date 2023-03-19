@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         textViewinput = findViewById<TextView>(R.id.input)
         textViewinput.setText("")
-        setup();
+        setup()
 
     }
     fun setup(){
