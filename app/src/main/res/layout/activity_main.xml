@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="MyCalculater"
+        android:text="MayTinh"
         android:textAlignment="center"
         android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
