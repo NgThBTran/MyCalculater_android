@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         textViewinput = findViewById<TextView>(R.id.input)
         textViewinput.setText("")
         setup()
-
     }
     fun setup(){
         val number1 = findViewById<Button>(R.id.number1)
