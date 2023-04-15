@@ -1,23 +1,43 @@
 package com.example.maytinh
 
+import android.app.Instrumentation.ActivityResult
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
+
 
 class MainActivity : AppCompatActivity() {
     var input1 = ""
     var input2 = ""
     var method = ""
+    var ListResult: ArrayList<String> = arrayListOf()
+
     private lateinit var textViewinput: TextView
+     var resultLauncherLambda = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+         // There are no request codes
+         val data: Intent? = result.data
+         Log.e("MainActivity", "Second activity callback: " + data?.getStringExtra("second_key_1"))
+
+     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         textViewinput = findViewById<TextView>(R.id.input)
         textViewinput.setText("")
-        setup()
+        setupUI()
     }
-    fun setup(){
+    fun setupUI(){
+        textViewinput = findViewById(R.id.input)
+        val num=findViewById<ImageButton>(R.id.imageButton2)
+        num.setOnClickListener() {
+            goToSecondActivity()
+        }
         val number1 = findViewById<Button>(R.id.number1)
         number1.setOnClickListener {
             if(method=="")
@@ -211,5 +231,13 @@ class MainActivity : AppCompatActivity() {
             }
             textViewinput.setText(result.toString())
         }
+    }
+
+    private fun goToSecondActivity() {
+        val intent=Intent(this,MainActivity2::class.java)
+        intent.putExtra("key_result",ListResult.toTypedArray())
+        //startActivity(intent) // not return data
+        //resultLauncherNormal.launcher(intent) // return data
+        resultLauncherLambda.launch(intent) // return data
     }
 }
