@@ -147,7 +147,7 @@ class MainActivity : AppCompatActivity() {
                 input2 + input2 + "8"
             }
             var olValue = textViewinput.text.toString()
-            var newValue = olValue
+            var newValue = olValue + "8"
             textViewinput.setText(newValue)
         }
         val number9 = findViewById<Button>(R.id.number9)
@@ -229,7 +229,9 @@ class MainActivity : AppCompatActivity() {
             else if (method == "÷"  ){
                 result = input1.toDouble() / input2.toDouble()
             }
+            var value = textViewinput.text.toString() + " = " + result.toString()
             textViewinput.setText(result.toString())
+            ListResult.add(value)
         }
     }
 

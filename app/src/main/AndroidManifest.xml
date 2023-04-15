@@ -12,6 +12,15 @@
         android:theme="@style/Theme.MayTinh"
         tools:targetApi="31">
         <activity
+            android:name=".history"
+            android:exported="false" />
+        <activity
+            android:name=".histoory"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
