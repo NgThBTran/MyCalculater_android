@@ -1,6 +1,5 @@
 package com.example.maytinh
 
-import android.app.Instrumentation.ActivityResult
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +7,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 
 
@@ -236,7 +234,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToSecondActivity() {
-        val intent=Intent(this,MainActivity2::class.java)
+        val intent=Intent(this,HistoryListViewActivity::class.java)
         intent.putExtra("key_result",ListResult.toTypedArray())
         //startActivity(intent) // not return data
         //resultLauncherNormal.launcher(intent) // return data
