@@ -222,7 +222,7 @@ class MainActivity : AppCompatActivity() {
                 result = input1.toDouble() - input2.toDouble()
             }
             else if ( method == "x"){
-                result = input1.toDouble() * input2.toInt()
+                result = input1.toDouble() * input2.toDouble()
             }
             else if (method == "÷"  ){
                 result = input1.toDouble() / input2.toDouble()
@@ -234,7 +234,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToSecondActivity() {
-        val intent=Intent(this,HistoryListViewActivity::class.java)
+        val intent=Intent(this,HistoryRecycleActivity::class.java)
         intent.putExtra("key_result",ListResult.toTypedArray())
         //startActivity(intent) // not return data
         //resultLauncherNormal.launcher(intent) // return data

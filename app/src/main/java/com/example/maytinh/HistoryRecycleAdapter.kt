@@ -39,7 +39,7 @@ class HistoryRecycleAdapter (val listData: List<String>, val context: Context): 
 
         fun bindData(item: String) {
             tvTitle.text = item
-            val formatData = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+            val formatData = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.US)
             val currentTime = Calendar.getInstance().time
             tvTime.text = formatData.format(currentTime)
         }
