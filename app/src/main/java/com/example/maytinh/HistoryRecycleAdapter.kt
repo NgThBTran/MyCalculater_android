@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HistoryRecycleAdapter (val listData: List<String>, val context: Context): RecyclerView.Adapter<HistoryRecycleAdapter.ViewHolder>() {
+class HistoryRecycleAdapter (val listData: List<CalculatorResult>, val context: Context): RecyclerView.Adapter<HistoryRecycleAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -37,11 +37,9 @@ class HistoryRecycleAdapter (val listData: List<String>, val context: Context): 
             tvTime = view.findViewById(R.id.tvTime)
         }
 
-        fun bindData(item: String) {
-            tvTitle.text = item
-            val formatData = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.US)
-            val currentTime = Calendar.getInstance().time
-            tvTime.text = formatData.format(currentTime)
+        fun bindData(item: CalculatorResult) {
+            tvTitle.text = item.result
+            tvTime.text = item.time
         }
     }
 }

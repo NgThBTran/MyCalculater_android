@@ -3,21 +3,28 @@ package com.example.maytinh
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.CalendarContract.CalendarEntity
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.activity.result.contract.ActivityResultContracts
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
     var input1 = ""
     var input2 = ""
     var method = ""
-    var ListResult: ArrayList<String> = arrayListOf()
+    var ListResult: ArrayList<CalculatorResult> = arrayListOf()
 
     private lateinit var textViewinput: TextView
-     var resultLauncherLambda = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private var resultLauncherLambda = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
          // There are no request codes
          val data: Intent? = result.data
          Log.e("MainActivity", "Second activity callback: " + data?.getStringExtra("second_key_1"))
@@ -26,17 +33,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        textViewinput = findViewById<TextView>(R.id.input)
-        textViewinput.setText("")
-
+        val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
+        setSupportActionBar(toolbar)
+        textViewinput = findViewById(R.id.input)
+        textViewinput.text = ""
         setupUI()
     }
-    fun setupUI(){
-        textViewinput = findViewById(R.id.input)
-        val num=findViewById<ImageButton>(R.id.imageButton2)
-        num.setOnClickListener() {
-            goToSecondActivity()
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.acion_history -> {
+                goToSecondActivity()
+            }
+            else -> {
+            }
         }
+        return super.onOptionsItemSelected(item)
+    }
+    private fun setupUI(){
         val number1 = findViewById<Button>(R.id.number1)
         number1.setOnClickListener {
             if(method=="")
@@ -49,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             }
             var oldValue = textViewinput.text.toString()
             var newValue = oldValue + "1"
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
         }
         val number2 = findViewById<Button>(R.id.number2)
         number2.setOnClickListener {
@@ -63,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             }
             var oldValue = textViewinput.text.toString()
             var newValue = oldValue + "2"
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
         }
         val number3 = findViewById<Button>(R.id.number3)
         number3.setOnClickListener {
@@ -77,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             }
             var olValue = textViewinput.text.toString()
             var newValue = olValue + "3"
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
         }
         val number4 = findViewById<Button>(R.id.number4)
         number4.setOnClickListener {
@@ -91,7 +108,7 @@ class MainActivity : AppCompatActivity() {
             }
             var olValue = textViewinput.text.toString()
             var newValue = olValue + "4"
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
         }
         val number5 = findViewById<Button>(R.id.number5)
         number5.setOnClickListener {
@@ -105,7 +122,7 @@ class MainActivity : AppCompatActivity() {
             }
             var olValue = textViewinput.text.toString()
             var newValue = olValue + "5"
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
         }
         val number6 = findViewById<Button>(R.id.number6)
         number6.setOnClickListener {
@@ -119,7 +136,7 @@ class MainActivity : AppCompatActivity() {
             }
             var olValue= textViewinput.text.toString()
             var newValue = olValue + "6"
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
         }
         val number7 = findViewById<Button>(R.id.number7)
         number7.setOnClickListener {
@@ -133,7 +150,7 @@ class MainActivity : AppCompatActivity() {
             }
             var olValue = textViewinput.text.toString()
             var newValue = olValue + "7"
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
         }
         val number8 = findViewById<Button>(R.id.number8)
         number8.setOnClickListener {
@@ -147,7 +164,7 @@ class MainActivity : AppCompatActivity() {
             }
             var olValue = textViewinput.text.toString()
             var newValue = olValue + "8"
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
         }
         val number9 = findViewById<Button>(R.id.number9)
         number9.setOnClickListener {
@@ -161,7 +178,7 @@ class MainActivity : AppCompatActivity() {
             }
             var olValue = textViewinput.text.toString()
             var newValue = olValue + "9"
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
         }
         val number0 = findViewById<Button>(R.id.number0)
         number0.setOnClickListener {
@@ -175,39 +192,39 @@ class MainActivity : AppCompatActivity() {
             }
             var olValue = textViewinput.text.toString()
             var newValue = olValue + "0"
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
         }
         val div = findViewById<Button>(R.id.buttonDIV)
         div.setOnClickListener {
             var olValue = textViewinput.text.toString()
             var newValue = olValue + "÷"
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
             method = "÷"
         }
         val mul = findViewById<Button>(R.id.buttonMUL)
         mul.setOnClickListener {
             var olValue = textViewinput.text.toString()
             var newValue = olValue + "x"
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
             method = "x"
         }
         val sub = findViewById<Button>(R.id.buttonSUB)
         sub.setOnClickListener {
             var olValue = textViewinput.text.toString()
             var newValue = olValue + " - "
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
             method = "-"
         }
         val add = findViewById<Button>(R.id.buttonADD)
         add.setOnClickListener {
             var oldValue = textViewinput.text.toString()
             var newValue = oldValue + " + "
-            textViewinput.setText(newValue)
+            textViewinput.text = newValue
             method = "+"
         }
         val ac = findViewById<Button>(R.id.buttonAC)
         ac.setOnClickListener {
-            textViewinput.setText("")
+            textViewinput.text = ""
             input1 = ""
             input2 = ""
             method = ""
@@ -229,14 +246,16 @@ class MainActivity : AppCompatActivity() {
                 result = input1.toDouble() / input2.toDouble()
             }
             var value = textViewinput.text.toString() + " = " + result.toString()
-            textViewinput.setText(result.toString())
-            ListResult.add(value)
+            textViewinput.text = result.toString()
+            val calendar = Calendar.getInstance()
+            val formatter = SimpleDateFormat("dd/MM/yy hh:mm:ss")
+            ListResult.add(CalculatorResult(value, formatter.format(calendar.time)))
         }
     }
 
     private fun goToSecondActivity() {
         val intent=Intent(this,HistoryRecycleActivity::class.java)
-        intent.putExtra("key_result",ListResult.toTypedArray())
+        intent.putExtra("key_result",ListResult)
         //startActivity(intent) // not return data
         //resultLauncherNormal.launcher(intent) // return data
         resultLauncherLambda.launch(intent) // return data
