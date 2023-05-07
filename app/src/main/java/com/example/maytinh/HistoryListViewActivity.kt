@@ -15,7 +15,7 @@ class HistoryListViewActivity: AppCompatActivity() {
         supportActionBar?.setTitle("History")
         val listData = intent.getStringArrayExtra("key_result")?.toList() ?: listOf<String>()
         val lvHistory = findViewById<ListView>(R.id.List)
-        val adapter = HistoryListViewAdapter(listData,this)
+        val adapter = HistoryAdapter(listData,this)
         lvHistory.adapter = adapter
     }
 }

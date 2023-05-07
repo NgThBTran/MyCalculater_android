@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+class HistoryAdapter(listData: List<String>, context: Context) :
+        BaseAdapter() {
 
-class HistoryListViewAdapter(ListData: List<String>, context: Context) : BaseAdapter() {
     private var listData: List<String> = emptyList()
     private var context: Context
 
