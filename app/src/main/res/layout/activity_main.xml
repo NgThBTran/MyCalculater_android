@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -15,7 +14,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="5dp"
-        app:title="Calculator"
+        app:title="☰"
         android:theme="@style/Main.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
     <TextView
@@ -32,8 +31,11 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="50dp"
+        android:minHeight="48dp"
         android:text="input"
-        android:textAlignment="textEnd"
+        android:background="@drawable/vien"
+        android:gravity="center|right"
+        android:autoSizeTextType="uniform"
         android:textSize="40dp" />
 
     <LinearLayout
@@ -51,6 +53,9 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="106dp"
             android:layout_weight="1"
+            android:textSize="30dp"
+            android:textColor="#FFFFFFFF"
+            android:background="@drawable/vien"
             android:text="AC"/>
 
         <Button
@@ -59,6 +64,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="106dp"
             android:layout_weight="1"
+            android:textSize="30dp"
+            android:textColor="#FFFFFFFF"
+            android:minHeight="48dp"
+            android:background="@drawable/vien"
             android:text="÷" />
     </LinearLayout>
 
@@ -76,6 +85,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="30dp"
+            android:textColor="#FFFFFFFF"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/vien"
             android:text="7"/>
 
         <Button
@@ -83,6 +96,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="30dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/vien"
             android:text="8"/>
 
         <Button
@@ -90,6 +106,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="30dp"
+            android:textColor="#FFFFFFFF"
+            android:background="@drawable/vien"
+            android:layout_marginRight="5dp"
             android:text="9" />
 
         <Button
@@ -97,6 +117,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="30dp"
+            android:textColor="#FFFFFFFF"
+            android:background="@drawable/vien"
+            android:minHeight="48dp"
             android:text="×" />
     </LinearLayout>
 
@@ -114,6 +138,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="30dp"
+            android:minHeight="48dp"
+            android:background="@drawable/vien"
+            android:layout_marginRight="5dp"
             android:text="4" />
 
         <Button
@@ -121,6 +149,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="30dp"
+            android:background="@drawable/vien"
+            android:minHeight="48dp"
+            android:layout_marginRight="5dp"
             android:text="5" />
 
         <Button
@@ -128,6 +160,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="30dp"
+            android:minHeight="48dp"
+            android:background="@drawable/vien"
+            android:layout_marginRight="5dp"
             android:text="6" />
 
         <Button
@@ -135,7 +171,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="-" />
+            android:textSize="30dp"
+            android:background="@drawable/vien"
+            android:text="−" />
     </LinearLayout>
 
     <LinearLayout
@@ -152,6 +190,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="30dp"
+            android:textColor="#FFFFFFFF"
+            android:background="@drawable/vien"
+            android:layout_marginRight="5dp"
             android:text="1" />
 
         <Button
@@ -159,6 +201,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="30dp"
+            android:textColor="#FFFFFFFF"
+            android:background="@drawable/vien"
+            android:layout_marginRight="5dp"
             android:text="2" />
 
         <Button
@@ -166,6 +212,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="30dp"
+            android:textColor="#FFFFFFFF"
+            android:background="@drawable/vien"
+            android:minHeight="48dp"
+            android:layout_marginRight="5dp"
             android:text="3" />
 
         <Button
@@ -173,6 +224,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="30dp"
+            android:textColor="#FFFFFFFF"
+            android:background="@drawable/vien"
+            android:minHeight="48dp"
             android:text="+" />
     </LinearLayout>
 
@@ -183,20 +238,30 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="2dp"
+        android:weightSum="1"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/number0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.055"
+            android:textSize="30dp"
+            android:minHeight="48dp"
+            android:textColor="#FFFFFFFF"
+            android:background="@drawable/vien"
+            android:layout_marginRight="5dp"
             android:text="0" />
 
         <Button
             android:id="@+id/buttonResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="13"
+            android:layout_weight="0.945"
+            android:textSize="30dp"
+            android:textColor="#FFFFFFFF"
+            android:background="@drawable/vien"
+            android:minHeight="48dp"
             android:text="=" />
     </LinearLayout>
 

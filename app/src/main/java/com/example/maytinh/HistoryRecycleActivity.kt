@@ -9,6 +9,7 @@ import android.widget.ListView
 import androidx.recyclerview.widget.RecyclerView
 
 
+@Suppress("DEPRECATION")
 class HistoryRecycleActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

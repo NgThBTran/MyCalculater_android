@@ -3,6 +3,7 @@ package com.example.maytinh
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.provider.CalendarContract.CalendarEntity
 import android.util.Log
 import android.view.Menu
@@ -28,13 +29,29 @@ class MainActivity : AppCompatActivity() {
          // There are no request codes
          val data: Intent? = result.data
          Log.e("MainActivity", "Second activity callback: " + data?.getStringExtra("second_key_1"))
-
      }
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putSerializable("key_result",ListResult)
+        outState.putString("input1",input1)
+        outState.putString("input2",input2)
+        outState.putString("method",method)
+        super.onSaveInstanceState(outState)
+    }
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+       var ListReult = savedInstanceState.getSerializable("key_result") as? ArrayList<CalculatorResult> ?: arrayListOf()
+        textViewinput.text = ListReult.last().result
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
         setSupportActionBar(toolbar)
+        if (savedInstanceState != null){
+            input1 = savedInstanceState.getString("input1").toString()
+            input2= savedInstanceState.getString("input2").toString()
+            method = savedInstanceState.getString("method").toString()
+        }
         textViewinput = findViewById(R.id.input)
         textViewinput.text = ""
         setupUI()
@@ -54,8 +71,14 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
     private fun setupUI(){
+        var bt = 0
         val number1 = findViewById<Button>(R.id.number1)
         number1.setOnClickListener {
+            if (bt == 1)
+            {
+                textViewinput.text = ""
+                bt = 0
+            }
             if(method=="")
             {
                 input1 = input1 + "1"
@@ -70,6 +93,11 @@ class MainActivity : AppCompatActivity() {
         }
         val number2 = findViewById<Button>(R.id.number2)
         number2.setOnClickListener {
+            if (bt == 1)
+            {
+                textViewinput.text = ""
+                bt = 0
+            }
             if (method == "")
             {
                 input1 = input1 + "2"
@@ -84,6 +112,11 @@ class MainActivity : AppCompatActivity() {
         }
         val number3 = findViewById<Button>(R.id.number3)
         number3.setOnClickListener {
+            if (bt == 1)
+            {
+                textViewinput.text = ""
+                bt = 0
+            }
             if (method == "")
             {
                 input1 = input1 +"3"
@@ -98,6 +131,11 @@ class MainActivity : AppCompatActivity() {
         }
         val number4 = findViewById<Button>(R.id.number4)
         number4.setOnClickListener {
+            if (bt == 1)
+            {
+                textViewinput.text = ""
+                bt = 0
+            }
             if (method == "")
             {
                 input1 = input1 + "4"
@@ -112,6 +150,11 @@ class MainActivity : AppCompatActivity() {
         }
         val number5 = findViewById<Button>(R.id.number5)
         number5.setOnClickListener {
+            if (bt == 1)
+            {
+                textViewinput.text = ""
+                bt = 0
+            }
             if (method == "")
             {
                 input1 = input1 + "5"
@@ -126,6 +169,11 @@ class MainActivity : AppCompatActivity() {
         }
         val number6 = findViewById<Button>(R.id.number6)
         number6.setOnClickListener {
+            if (bt == 1)
+            {
+                textViewinput.text = ""
+                bt = 0
+            }
             if (method == "")
             {
                 input1 = input1 + "6"
@@ -140,6 +188,11 @@ class MainActivity : AppCompatActivity() {
         }
         val number7 = findViewById<Button>(R.id.number7)
         number7.setOnClickListener {
+            if (bt == 1)
+            {
+                textViewinput.text = ""
+                bt = 0
+            }
             if (method == "")
             {
                 input1 = input1 + "7"
@@ -154,6 +207,11 @@ class MainActivity : AppCompatActivity() {
         }
         val number8 = findViewById<Button>(R.id.number8)
         number8.setOnClickListener {
+            if (bt == 1)
+            {
+                textViewinput.text = ""
+                bt = 0
+            }
             if (method == "")
             {
                 input1 = input1 + "8"
@@ -168,6 +226,11 @@ class MainActivity : AppCompatActivity() {
         }
         val number9 = findViewById<Button>(R.id.number9)
         number9.setOnClickListener {
+            if (bt == 1)
+            {
+                textViewinput.text = ""
+                bt = 0
+            }
             if (method == "")
             {
                 input1 = input1 + "9"
@@ -197,21 +260,21 @@ class MainActivity : AppCompatActivity() {
         val div = findViewById<Button>(R.id.buttonDIV)
         div.setOnClickListener {
             var olValue = textViewinput.text.toString()
-            var newValue = olValue + "÷"
+            var newValue = olValue + " ÷ "
             textViewinput.text = newValue
             method = "÷"
         }
         val mul = findViewById<Button>(R.id.buttonMUL)
         mul.setOnClickListener {
             var olValue = textViewinput.text.toString()
-            var newValue = olValue + "x"
+            var newValue = olValue + " × "
             textViewinput.text = newValue
             method = "x"
         }
         val sub = findViewById<Button>(R.id.buttonSUB)
         sub.setOnClickListener {
             var olValue = textViewinput.text.toString()
-            var newValue = olValue + " - "
+            var newValue = olValue + " − "
             textViewinput.text = newValue
             method = "-"
         }
@@ -236,13 +299,16 @@ class MainActivity : AppCompatActivity() {
             {
                 result = input1.toDouble() + input2.toDouble()
             }
-            else if (method == "-"){
+            else if (method == "-")
+            {
                 result = input1.toDouble() - input2.toDouble()
             }
-            else if ( method == "x"){
+            else if (method == "x")
+            {
                 result = input1.toDouble() * input2.toDouble()
             }
-            else if (method == "÷"  ){
+            else if (method == "÷")
+            {
                 result = input1.toDouble() / input2.toDouble()
             }
             var value = textViewinput.text.toString() + " = " + result.toString()
@@ -250,6 +316,10 @@ class MainActivity : AppCompatActivity() {
             val calendar = Calendar.getInstance()
             val formatter = SimpleDateFormat("dd/MM/yy hh:mm:ss")
             ListResult.add(CalculatorResult(value, formatter.format(calendar.time)))
+            bt = 1
+            input1 = ""
+            input2 = ""
+            method = ""
         }
     }
 
